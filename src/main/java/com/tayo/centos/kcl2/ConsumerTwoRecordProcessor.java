@@ -41,7 +41,7 @@ public class ConsumerTwoRecordProcessor implements IRecordProcessor
         if(list.size() > 0)
         {
             log.info("Received record size is : " + list.size());
-            DWLoaderThread loader = new DWLoaderThread(list);
+            DBLoaderThread loader = new DBLoaderThread(list);
             Thread thread = new Thread(loader);
             thread.start();
 
