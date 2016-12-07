@@ -1,6 +1,7 @@
 package com.tayo.centos.scheduler;
 
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -30,7 +31,7 @@ public class ScheduledJob
     private static final String three = "</body></html>";
     private static final String head1 = "<p>Top Users and Top Activities<p>";
     private static final String head2 = "<p>Last Activities<p>";
-    private static final String outputfile = "index.html";
+   // private static final String outputfile = "index.html";
 
 
 	
@@ -176,9 +177,9 @@ public class ScheduledJob
 			UserActivity ua = new UserActivity(activityType, userId);
 			activities.add(ua);
 		}
-		
+		String outputFile = getIndexFileLocationProps();
 		//Open index file to write html document
-		Path path = Paths.get(outputfile);
+		Path path = Paths.get(outputFile);
 		try(BufferedWriter writer = Files.newBufferedWriter(path))
 		{
 			writer.write(one);
@@ -202,5 +203,16 @@ public class ScheduledJob
 		
 		System.out.println("printLast20Activities");
 	}
+	
+  static String getIndexFileLocationProps() throws IOException
+    {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream input = classLoader.getResourceAsStream("db.properties");
+        java.util.Properties prop = new Properties();
+        prop.load(input);
+
+        return prop.getProperty("indexfile");
+
+    }
 	
 }
