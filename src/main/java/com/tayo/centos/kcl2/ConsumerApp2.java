@@ -80,7 +80,7 @@ public class ConsumerApp2
     public static String getStreamNameProps() throws IOException
     {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input =  classLoader.getResourceAsStream("db.properties");
+        InputStream input = classLoader.getResourceAsStream("db.properties");
         java.util.Properties prop = new Properties();
         prop.load(input);
 
