@@ -2,7 +2,6 @@ package com.tayo.centos;
 
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.kinesis.producer.*;
-import com.google.common.collect.Iterables;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -11,7 +10,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.omg.CORBA.portable.InputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -311,7 +309,7 @@ public class ProducerOne
     public static String getFileLocationProps() throws IOException
     {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input = (InputStream) classLoader.getResourceAsStream("db.properties");
+        InputStream input =  classLoader.getResourceAsStream("db.properties");
         java.util.Properties prop = new Properties();
         prop.load(input);
 
@@ -322,7 +320,7 @@ public class ProducerOne
     public static String getStreamNameProps() throws IOException
     {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input = (InputStream) classLoader.getResourceAsStream("db.properties");
+        InputStream input = classLoader.getResourceAsStream("db.properties");
         java.util.Properties prop = new Properties();
         prop.load(input);
 
@@ -333,7 +331,7 @@ public class ProducerOne
     public static String getKPLTempDir() throws IOException
     {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input = (InputStream) classLoader.getResourceAsStream("db.properties");
+        InputStream input =  classLoader.getResourceAsStream("db.properties");
         java.util.Properties prop = new Properties();
         prop.load(input);
 
