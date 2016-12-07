@@ -11,6 +11,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.omg.CORBA.portable.InputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +36,7 @@ public class ProducerOne
     private static final Logger log = LoggerFactory.getLogger(ProducerOne.class);
     private static final String DELIM = ",";
     public static final String STREAM_NAME = "centosstream";
-    public static final String KPL_TMP_DIR = "/Users/temitayo/workspace/centos";
+    //public static final String KPL_TMP_DIR = "/Users/temitayo/workspace/centos";
     private static final Random RANDOM = new Random();
     private List<UserDAO> userList;
     //private final WatchService watcher;
@@ -51,11 +52,12 @@ public class ProducerOne
         return userList;
     }
 
-    public static KinesisProducer getKinesisProducer()
+    public static KinesisProducer getKinesisProducer() throws IOException
     {
+    	String kpltempdir = getKPLTempDir();
         KinesisProducerConfiguration config = KinesisProducerConfiguration.fromPropertiesFile("default_config.properties");
         config.setCredentialsProvider(new DefaultAWSCredentialsProviderChain());
-        config.setTempDirectory(KPL_TMP_DIR);
+        config.setTempDirectory(kpltempdir);
         return new KinesisProducer(config);
     }
 
@@ -309,7 +311,7 @@ public class ProducerOne
     public static String getFileLocationProps() throws IOException
     {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input = classLoader.getResourceAsStream("db.properties");
+        InputStream input = (InputStream) classLoader.getResourceAsStream("db.properties");
         java.util.Properties prop = new Properties();
         prop.load(input);
 
@@ -320,11 +322,22 @@ public class ProducerOne
     public static String getStreamNameProps() throws IOException
     {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input = classLoader.getResourceAsStream("db.properties");
+        InputStream input = (InputStream) classLoader.getResourceAsStream("db.properties");
         java.util.Properties prop = new Properties();
         prop.load(input);
 
         return prop.getProperty("streamname");
+
+    }
+    
+    public static String getKPLTempDir() throws IOException
+    {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream input = (InputStream) classLoader.getResourceAsStream("db.properties");
+        java.util.Properties prop = new Properties();
+        prop.load(input);
+
+        return prop.getProperty("kpltempdir");
 
     }
 
