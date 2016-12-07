@@ -5,7 +5,7 @@ package com.tayo.centos;
  */
 public class UserDAO
 {
-    private String Id;
+    private long Id;
     private String userId;
     private String fullName;
     private String gender;
@@ -15,7 +15,7 @@ public class UserDAO
     private String activityMetadata;
 
 
-    public UserDAO(String id, String userId, String fullName, String gender, String relationshipStatus, String activityTimestamp, String activityType)
+    public UserDAO(long id, String userId, String fullName, String gender, String relationshipStatus, String activityTimestamp, String activityType)
     {
         Id = id;
         this.userId = userId;
@@ -26,7 +26,7 @@ public class UserDAO
         this.activityType = activityType;
     }
 
-    public UserDAO(String id, String userId, String fullName, String gender, String relationshipStatus, String activityTimestamp, String activityType, String activityMetadata)
+    public UserDAO(long id, String userId, String fullName, String gender, String relationshipStatus, String activityTimestamp, String activityType, String activityMetadata)
     {
         Id = id;
         this.userId = userId;
@@ -38,12 +38,12 @@ public class UserDAO
         this.activityMetadata = activityMetadata;
     }
 
-    public String getId()
+    public long getId()
     {
         return Id;
     }
 
-    public void setId(String id)
+    public void setId(long id)
     {
         Id = id;
     }

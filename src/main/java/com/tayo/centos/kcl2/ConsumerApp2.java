@@ -9,11 +9,14 @@ import com.amazonaws.services.kinesis.clientlibrary.lib.worker.KinesisClientLibC
 import com.amazonaws.services.kinesis.clientlibrary.lib.worker.Worker;
 import com.tayo.centos.ProducerOne;
 
+import org.omg.CORBA.portable.InputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.text.SimpleDateFormat;
+import java.util.Properties;
 import java.util.UUID;
 
 /**
@@ -47,10 +50,10 @@ public class ConsumerApp2
         initialize();
 
         String workerId = InetAddress.getLocalHost().getCanonicalHostName() + ":" + UUID.randomUUID();
-
+        String streamName = getStreamNameProps();
         KinesisClientLibConfiguration kinesisClientLibConfiguration =
                 new KinesisClientLibConfiguration(KCL_APP_NAME,
-                        ProducerOne.STREAM_NAME,
+                        streamName,
                         credentialsProvider,
                         workerId);
         kinesisClientLibConfiguration.withInitialPositionInStream(INITIAL_POSITION_IN_STREAM).withRegionName("us-west-2").withMaxRecords(20);
@@ -74,4 +77,16 @@ public class ConsumerApp2
         System.exit(exitCode);
 
     }
+    
+    public static String getStreamNameProps() throws IOException
+    {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream input = (InputStream) classLoader.getResourceAsStream("db.properties");
+        java.util.Properties prop = new Properties();
+        prop.load(input);
+
+        return prop.getProperty("streamname");
+
+    }
+
 }

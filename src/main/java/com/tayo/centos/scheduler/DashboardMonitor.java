@@ -8,7 +8,7 @@ public class DashboardMonitor
 	{
 		Timer timer = new Timer();
 		ScheduledTask task = new ScheduledTask();
-		timer.schedule(task, 0, 1000);	
+		timer.schedule(task, 0, 420000);	//use 420000 milliseconds
 	}
 	
 

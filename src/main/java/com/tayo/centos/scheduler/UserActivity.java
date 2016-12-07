@@ -6,8 +6,7 @@ public class UserActivity
 	private String activityType;
 	
 	
-	public UserActivity(String userId, String activityType) 
-	
+	public UserActivity(String userId, String activityType) 	
 	{
 		super();
 		this.userId = userId;
@@ -27,6 +26,11 @@ public class UserActivity
 	public void setActivityType(String activityType) 
 	{
 		this.activityType = activityType;
+	}
+	@Override
+	public String toString() 
+	{
+		return "userId:" + userId + ", activityType:" + activityType;
 	}
 	
 	
