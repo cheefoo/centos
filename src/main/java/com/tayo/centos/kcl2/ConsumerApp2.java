@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
-import java.text.SimpleDateFormat;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -74,7 +73,6 @@ public class ConsumerApp2
             exitCode = 1;
         }
         System.exit(exitCode);
-
     }
     
     public static String getStreamNameProps() throws IOException
