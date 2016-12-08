@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tayo.centos.util.CentosUtils;
 
 
 public class ScheduledJob 
@@ -31,7 +32,7 @@ public class ScheduledJob
     private static final String three = "</body></html>";
     private static final String head1 = "<p>Top Users and Top Activities<p>";
     private static final String head2 = "<p>Last Activities<p>";
-    private static final String outputFile = "index.html";
+    //private static final String outputFile = "index.html";
 
 
 	
@@ -185,7 +186,7 @@ public class ScheduledJob
 			log.info("userId is " + userId);
 			activities.add(ua);
 		}
-		//String outputFile = getIndexFileLocationProps();
+		String outputFile = CentosUtils.getProperties().getProperty("indexfile");
 		//Open index file to write html document
 		Path path = Paths.get(outputFile);
 		try(BufferedWriter writer = Files.newBufferedWriter(path))
@@ -212,16 +213,5 @@ public class ScheduledJob
 		
 		System.out.println("printed ...");
 	}
-	
-  static String getIndexFileLocationProps() throws IOException
-    {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input = classLoader.getResourceAsStream("db.properties");
-        java.util.Properties prop = new Properties();
-        prop.load(input);
-
-        return prop.getProperty("indexfile");
-
-    }
 	
 }
