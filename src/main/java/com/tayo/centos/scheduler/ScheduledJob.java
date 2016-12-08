@@ -31,7 +31,7 @@ public class ScheduledJob
     private static final String three = "</body></html>";
     private static final String head1 = "<p>Top Users and Top Activities<p>";
     private static final String head2 = "<p>Last Activities<p>";
-    //private static final String outputFile = "index.html";
+    private static final String outputFile = "index.html";
 
 
 	
@@ -151,10 +151,11 @@ public class ScheduledJob
 		String dateToCompute = format.format(timeToSend);
 		Connection conn = getConnection();
 		java.sql.PreparedStatement ps = null;
-		String sql = "select activityType, activityTimestamp"+ 
-				"from user_events e1 where activityTimestamp = (select max(activityTimestamp)"+ 
-				"from user_events e2 where e1.id = e2.id) group by activityType;";
+		String sql = "select activityType, activityTimestamp "+ 
+				" from user_events e1 where activityTimestamp = (select max(activityTimestamp)"+ 
+				" from user_events e2 where e1.id = e2.id) group by activityType;";
 		
+		log.info("SQL is " + sql);
 		ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		List<ActivityTimestamp> activityList = new ArrayList<ActivityTimestamp>();
@@ -163,23 +164,28 @@ public class ScheduledJob
 			String activityType = rs.getString("activityType");
 			String activityTime = rs.getString("activityTimestamp");
 			ActivityTimestamp activity = new ActivityTimestamp(activityType, activityTime);
+			//log.info("activityType is " + activityType);
 			activityList.add(activity);
 		}	
 		java.sql.PreparedStatement ps2 = null;
 		String sql2 = "select activityType, userid from ("+
 				"select userid, count(userid), activityType from user_events "+
 				"where activityTimestamp < current_time() and activityTimestamp >" + "'"+dateToCompute+"'"+") as t;";
+		
+		log.info("SQL is " + sql2);
 		ps2 = conn.prepareStatement(sql2);
-		ResultSet rs2 = ps.executeQuery();
+		ResultSet rs2 = ps2.executeQuery();
 		List<UserActivity> activities = new ArrayList<UserActivity>();
 		while (rs2.next())
 		{
 			String activityType = rs2.getString("activityType");
+			log.info("activityType is " + activityType);
 			String userId = rs2.getString("userid");
 			UserActivity ua = new UserActivity(activityType, userId);
+			log.info("userId is " + userId);
 			activities.add(ua);
 		}
-		String outputFile = getIndexFileLocationProps();
+		//String outputFile = getIndexFileLocationProps();
 		//Open index file to write html document
 		Path path = Paths.get(outputFile);
 		try(BufferedWriter writer = Files.newBufferedWriter(path))
