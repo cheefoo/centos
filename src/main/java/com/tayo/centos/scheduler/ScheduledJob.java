@@ -31,7 +31,7 @@ public class ScheduledJob
     private static final String three = "</body></html>";
     private static final String head1 = "<p>Top Users and Top Activities<p>";
     private static final String head2 = "<p>Last Activities<p>";
-   // private static final String outputfile = "index.html";
+    //private static final String outputFile = "index.html";
 
 
 	
@@ -151,17 +151,19 @@ public class ScheduledJob
 		String dateToCompute = format.format(timeToSend);
 		Connection conn = getConnection();
 		java.sql.PreparedStatement ps = null;
-		String sql = "select activityType, count(activityType) from user_events " +
-				"where activityTimestamp < current_time() and activityTimestamp >"+"'"+dateToCompute+"'"+
-				"group by activityType order by count(activityType) desc;";
+		String sql = "select activityType, activityTimestamp"+ 
+				"from user_events e1 where activityTimestamp = (select max(activityTimestamp)"+ 
+				"from user_events e2 where e1.id = e2.id) group by activityType;";
 		
 		ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-		List<String> activityList = new ArrayList<String>();
+		List<ActivityTimestamp> activityList = new ArrayList<ActivityTimestamp>();
 		while (rs.next())
 		{
 			String activityType = rs.getString("activityType");
-			activityList.add(activityType);
+			String activityTime = rs.getString("activityTimestamp");
+			ActivityTimestamp activity = new ActivityTimestamp(activityType, activityTime);
+			activityList.add(activity);
 		}	
 		java.sql.PreparedStatement ps2 = null;
 		String sql2 = "select activityType, userid from ("+
@@ -193,15 +195,16 @@ public class ScheduledJob
 			writer.write("<p>");
 			writer.write(head2);
 			writer.write("<p>");
-			for(String a: activityList)
+			for(ActivityTimestamp a: activityList)
 			{
-				writer.write(a);
+				writer.write(a.toString());
+				log.info(a.toString());
 			}
 			writer.write("<p>");
 			writer.write(three);
 		}
 		
-		System.out.println("printLast20Activities");
+		System.out.println("printed ...");
 	}
 	
   static String getIndexFileLocationProps() throws IOException
