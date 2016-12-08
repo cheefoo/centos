@@ -17,7 +17,7 @@ The applications consists of 4 components as follows:
 4. S3 bucket
 5. EC2 instance(s)
 6. Kinesis IAM role to be attached to ec2 instances (http://docs.aws.amazon.com/streams/latest/dev/controlling-access.html)
-7. NodeJS
+7. nodejs
 
 #Getting Started
 1. Clone the repository into your instance
