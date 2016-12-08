@@ -27,7 +27,7 @@ public class ScheduledJob
 	private static final Logger log = LoggerFactory.getLogger(ScheduledJob.class);
 	private static final String pattern = "yyyy-MM-dd HH:mm:ss ";
 	static SimpleDateFormat format = new SimpleDateFormat(pattern);
-	private static final String one = "<!DOCTYPE html><head>meta http-equiv=\"Refresh\" content=\"5\"></head><body>";
+	private static final String one = "<!DOCTYPE html><head><meta http-equiv=\"Refresh\" content=\"5\"></head><body>";
     private static final String two = "<h1>My First Heading</h1>";
     private static final String three = "</body></html>";
     private static final String head1 = "<p>Top Users and Top Activities<p>";
