@@ -209,6 +209,8 @@ public class ScheduledJob
 			}
 			writer.write("<p>");
 			writer.write(three);
+			writer.flush();
+			writer.close();
 		}
 		
 		System.out.println("printed ...");
