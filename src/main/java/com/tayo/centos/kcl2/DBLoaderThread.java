@@ -133,7 +133,7 @@ public class DBLoaderThread implements Runnable
                     log.info("id = "+id + ",userId ="  +userId +",fullName =" + fullName + ",gender = "+gender + ",relationshipStatus= "
                                 +relationshipStatus +",activityTimestamp =" + activityTimestamp  +",activityType =" + activityType + ",activityMetadata =" + activityMetadata);
                        
-                        stmt.setString(1, id);
+                        stmt.setLong(1, Long.valueOf(id));
                         stmt.setString(2, userId);
                         stmt.setString(3, fullName);
                         stmt.setString(4, gender);
@@ -148,14 +148,6 @@ public class DBLoaderThread implements Runnable
                         stmt.setTimestamp(13, Timestamp.valueOf(activityTimestamp));
                         stmt.setString(14, activityType);
                         stmt.setString(15, "");
-                        /*stmt.setString(1, userId);
-                        stmt.setString(2, fullName);
-                        stmt.setString(3, gender);
-                        stmt.setString(4, relationshipStatus);
-                        stmt.setTimestamp(5, Timestamp.valueOf(activityTimestamp));
-                        stmt.setString(6, activityType);
-                        stmt.setString(7, "");
-                        stmt.setString(8, id);*/
                         stmt.addBatch();
                         log.info("Batch " + k + " added successfully" );
                         k++;
