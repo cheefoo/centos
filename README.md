@@ -24,6 +24,7 @@ The applications consists of 4 components as follows:
 3. Edit the KPL default_config.properties and add your values (pay attention to the region in this config)
 4. ssh into one of instance and start the Archiving Consumer --mvn exec:java -Dexec.mainClass=com.tayo.centos.kcl1.ConsumerApp
 5. start the dashboard consumer mvn exec:java -Dexec.mainClass=com.tayo.centos.kcl2.ConsumerApp2
+6. run the python script (script folder) to generate data -- python generateJson.py
 6. start the producer -- mvn exec:java -Dexec.mainClass=com.tayo.centos.ProducerOne
 7. start up the Job Scheduler -- mvn exec:java -Dexec.mainClass=com.tayo.centos.scheduler.DashboardMonitor
 8. start the nodejs server (webapps folder) -- node server.js
