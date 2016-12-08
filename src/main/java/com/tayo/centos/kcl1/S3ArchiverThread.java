@@ -7,11 +7,14 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.kinesis.model.Record;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.tayo.centos.util.CentosUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.file.Files;
@@ -117,17 +120,23 @@ public class S3ArchiverThread implements Runnable
 
     private void uploadS3File(String path)
     {
+    	
         try
         {
+        	String bucketName = CentosUtils.getProperties().getProperty("s3bucket");
             System.out.println("Uploading a new object to S3 from a file\n");
             File file = new File(path.toString());
             log.info("Filename is " + path.toString());
-            s3Client.putObject(new PutObjectRequest(BUCKET_NAME, file.getName(), file));
+            s3Client.putObject(new PutObjectRequest(bucketName, file.getName(), file));
 
         }
         catch(AmazonServiceException ase)
         {
             log.error("Failed uploading file to S3 : " + path);
+        }
+        catch(IOException ase)
+        {
+            log.error("Failed uploading file to S3 : " + ase.toString());
         }
     }
 
