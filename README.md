@@ -190,7 +190,6 @@ The application consists of 5 components:
 
 | Key           | Default                                        | Description                                                                     |
 | :------------ | :--------------------------------------------- | :------------------------------------------------------------------------------ |
- Database                                              |
 | mysqldburl    | None                                           | The JDBC URL for the MySQL RDS Instance, e.g. jdbc:mysql://instance:3306/mydb   |
 | mysqldbuser   | None                                           | Username for the MySQL Database                                                 |
 | mysqldbpwd    | None                                           | Password for the MySQL Database                                                 |
@@ -239,7 +238,7 @@ mvn exec:java -Dexec.mainClass=com.tayo.centos.scheduler.DashboardMonitor
 start the nodejs server (webapps folder) -- node server.js  
   
 Note:   
-* KPL reads region from "./default_config.properties"  
-* Endless while loop in [KPL](https://github.com/leclue/centos/blob/master/src/main/java/com/tayo/centos/ProducerOne.java#L127) needs to be fixed.  
+* KPL reads region and stream name from "./default_config.properties"  
+* KCL Apps reads region and stream name from ./db.properties
 
 
