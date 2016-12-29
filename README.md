@@ -200,7 +200,9 @@ The application consists of 5 components:
 | s3bucket      | None                                           | S3 Bucket Name for archived data                                                |
 
 ###Running the Example:
-1. Start the Archiving Consumer from the **~/centos** directory  
+1. SSH into the KCL Instance and edit the **~/centos/src/main/resources/db.properties** file according to the resources created. 
+```mvn compile''' 
+Start the Archiving Consumer from the **~/centos** directory  
   ```
   nohup bash -c \  
   "(mvn exec:java -Dexec.mainClass=com.tayo.centos.kcl1.ConsumerApp > ~/centos/logs/archiving_consumer.log) \  
@@ -214,7 +216,7 @@ The application consists of 5 components:
   &> ~/centos/logs/dashboard_consumer.log" &  
 
   ```
-3. SSH into the KCL Instance and edit the **~/centos/target/classes/db.properties** file according to the resources created.  
+3. SSH into the KPL Instance and edit the **~/centos/kpl_config.properties** file according to the resources created.  
 4. Generate some sample data  
   ```
   cd ~/centos/scripts/  
@@ -231,14 +233,23 @@ The application consists of 5 components:
 
   ```
   
+6. Start the Job Scheduler  
+  ```
+  nohup bash -c \  
+  "(mvn exec:java -Dexec.mainClass=ccom.tayo.centos.scheduler.DashboardMonitor  > ~/centos/logs/scheduler.log) \  
+   &> ~/centos/logs/scheduler.log" &  
 
-**todo**  
-Start the Job Scheduler  
-mvn exec:java -Dexec.mainClass=com.tayo.centos.scheduler.DashboardMonitor 
-start the nodejs server (webapps folder) -- node server.js  
+  ```
+  
+7. Start the NodeJS Server  from the webapps directory
+  ```
+ node server.js
+
+  ```
+
   
 Note:   
-* KPL reads region and stream name from "./default_config.properties"  
+* KPL reads region and stream name from "./kpl_config.properties"  
 * KCL Apps reads region and stream name from ./db.properties
 
 
