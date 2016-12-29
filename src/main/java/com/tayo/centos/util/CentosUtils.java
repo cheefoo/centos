@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/*
+* Utilities class to load resource properties
+ */
 public class CentosUtils 
 {
 	

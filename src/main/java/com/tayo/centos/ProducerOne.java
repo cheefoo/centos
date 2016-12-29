@@ -34,7 +34,7 @@ public class ProducerOne
 
     private static KinesisProducer getKinesisProducer() throws IOException
     {
-        KinesisProducerConfiguration config = KinesisProducerConfiguration.fromPropertiesFile("default_config.properties");
+        KinesisProducerConfiguration config = KinesisProducerConfiguration.fromPropertiesFile("kpl_config.properties");
         config.setCredentialsProvider(new DefaultAWSCredentialsProviderChain());
         return new KinesisProducer(config);
     }
