@@ -7,11 +7,17 @@ This is an end-to-end [AWS Kinesis Streams](https://aws.amazon.com/kinesis/strea
 
 The application consists of 5 components:
 
-1. A producer application
-2. An Archiving Consumer application
-3. A De-duplicating Dashboard consumer application
-4. A Dashboard Job Scheduler
-5. A script to generate data in the format required by the application(s)
+1. A script to generate data in the format required by the application(s)
+2. A Kinesis producer application
+3. A De-duplicating Dashboard KCL application
+4. An S3 Archiving KCL application 
+5. A Dashboard Job Scheduler 
+
+##Architecture Diagrams:
+![alt tag](https://github.com/cheefoo/centos/blob/master/Archie1.png)
+
+###Architecture Diagram II:
+![alt tag](https://github.com/cheefoo/centos/blob/master/Archie2.png)
 
 ###Requirements:
 1. An Amazon Web Services [Account](https://aws.amazon.com/free/?sc_channel=PS&sc_campaign=acquisition_ZA&sc_publisher=google&sc_medium=cloud_computing_b&sc_content=aws_account_e&sc_detail=aws%20account&sc_category=cloud_computing&sc_segment=77706639422&sc_matchtype=e&sc_country=ZA&s_kwcid=AL!4422!3!77706639422!e!!g!!aws%20account&ef_id=V9u@TgAABMH86aOm:20161227051709:s)
@@ -21,8 +27,7 @@ The application consists of 5 components:
   3.2. Two IAM roles, Instance Profiles and [Policies](http://docs.aws.amazon.com/streams/latest/dev/controlling-access.html) required for the KCL and KPL instances  
   3.3. Two AWS EC2 Instances based on AmazonLinux with dependencies pre-installed  
   3.3. An RDS mysql database  
-  3.4. A Redshift database  
-  3.5. An Amazon S3 bucket  
+  3.4. An Amazon S3 bucket  
 4. When the KCL is initiated, two DynamoDB tables are created  
 
 ###Setting up the environment:
@@ -185,14 +190,10 @@ The application consists of 5 components:
 
 | Key           | Default                                        | Description                                                                     |
 | :------------ | :--------------------------------------------- | :------------------------------------------------------------------------------ |
-| dburl         | None                                           | The JDBC URL for the redshift cluster, e.g. jdbc:redshift://cluster:5439/mydb   |
-| dbuser        | None                                           | Username for the Redshift Database                                              |
-| dbpwd         | None                                           | Password for the Redshift Database                                              |
+ Database                                              |
 | mysqldburl    | None                                           | The JDBC URL for the MySQL RDS Instance, e.g. jdbc:mysql://instance:3306/mydb   |
 | mysqldbuser   | None                                           | Username for the MySQL Database                                                 |
 | mysqldbpwd    | None                                           | Password for the MySQL Database                                                 |
-| jsonfile      | /home/ec2-user/jsonfile.json                   | ???                                                                             |
-| kpltempdir    | /home/ec2-user/centos                          | ???                                                                             |
 | indexfile     | /home/ec2-user/centos/webapp/public/index.html | Dashboard index page                                                            |
 | filelocation  | /home/ec2-user/centos/scripts/generatedData    | Input file location (json formatted)                                            |
 | streamname    | None                                           | Name of the AWS Kinesis Stream                                                  |
