@@ -34,10 +34,8 @@ public class ProducerOne
 
     private static KinesisProducer getKinesisProducer() throws IOException
     {
-    	String kpltempdir = CentosUtils.getProperties().getProperty("kpltempdir");
         KinesisProducerConfiguration config = KinesisProducerConfiguration.fromPropertiesFile("default_config.properties");
         config.setCredentialsProvider(new DefaultAWSCredentialsProviderChain());
-        config.setTempDirectory(kpltempdir);
         return new KinesisProducer(config);
     }
 
