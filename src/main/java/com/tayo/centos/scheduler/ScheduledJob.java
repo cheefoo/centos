@@ -21,6 +21,13 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tayo.centos.util.CentosUtils;
 
+/*
+* Job that will be executed periodically.
+* Job contains top user activities and last activities on the site
+* *
+* Also (re-)creates the index file  that is loaded by the nodejs server
+ */
+
 
 public class ScheduledJob 
 {
@@ -70,88 +77,16 @@ public class ScheduledJob
 
         return conn;
     }
-	static void printTop10UserActivitiesByTop10Users(Date timeToSend) throws Exception
-	{
-		log.info("Time to send is : " + format.format(timeToSend));
-		String dateToCompute = format.format(timeToSend);
-		Connection conn = getConnection();
-		java.sql.PreparedStatement ps = null;
-		/*String sql = "select activityType, userid from ("+
-					"select userid, count(userid), activityType from user_events "+
-					"where activityTimestamp < current_time() and activityTimestamp >'2016-11-30 20:15:07') as t;";*/
-		String sql = "select activityType, userid from ("+
-				"select userid, count(userid), activityType from user_events "+
-				"where activityTimestamp < current_time() and activityTimestamp >" + "'"+dateToCompute+"'"+") as t;";
-		
-		ps = conn.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-		List<UserActivity> activityList = new ArrayList<UserActivity>();
-		while (rs.next())
-		{
-			String activityType = rs.getString("activityType");
-			String userId = rs.getString("userid");
-			UserActivity ua = new UserActivity(activityType, userId);
-			activityList.add(ua);
-		}
-		ObjectMapper mapper = new ObjectMapper();
-		try
-		{
-			for(UserActivity user: activityList)
-			{
-				//mapper.writeValue(new File("/"), user);
-				log.info(mapper.writeValueAsString(user));
-			}
-		}
-		catch(Exception e)
-		{
-			log.error(e.toString());
-		}
-		System.out.println("printTop10UserActivitiesByTop10Users");
-		
-	}
-	
-	static void printLast20Activities(Date timeToSend) throws Exception
-	{
-		log.info("Time to send is : " + format.format(timeToSend));
-		String dateToCompute = format.format(timeToSend);
-		Connection conn = getConnection();
-		java.sql.PreparedStatement ps = null;
-		String sql = "select activityType, count(activityType) from user_events " +
-				"where activityTimestamp < current_time() and activityTimestamp >"+"'"+dateToCompute+"'"+
-				"group by activityType order by count(activityType) desc;";
-		
-		ps = conn.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-		List<String> activityList = new ArrayList<String>();
-		while (rs.next())
-		{
-			String activityType = rs.getString("activityType");
-			activityList.add(activityType);
-		}
-		
-		ObjectMapper mapper = new ObjectMapper();
-		try
-		{
-			for(String user: activityList)
-			{
-				//mapper.writeValue(new File("/"), user);
-				log.info(mapper.writeValueAsString(user));
-			}
-		}
-		catch(Exception e)
-		{
-			log.error(e.toString());
-		}
-		
-		System.out.println("printLast20Activities");
-	}
-	
+
 	static void printAllAnswers(Date timeToSend)throws Exception
 	{
 		log.info("Time to send is : " + format.format(timeToSend));
 		String dateToCompute = format.format(timeToSend);
 		Connection conn = getConnection();
 		java.sql.PreparedStatement ps = null;
+		/*
+		* Query to collect last activities
+		 */
 		String sql = "select activityType, activityTimestamp "+ 
 				" from user_events e1 where activityTimestamp = (select max(activityTimestamp)"+ 
 				" from user_events e2 where e1.id = e2.id) group by activityType;";
@@ -169,6 +104,10 @@ public class ScheduledJob
 			activityList.add(activity);
 		}	
 		java.sql.PreparedStatement ps2 = null;
+		/*
+		*  Query to collect top 10 activities by top users in the last 7 minutes
+		 */
+
 		String sql2 = "select activityType, userid from ("+
 				"select userid, count(userid), activityType from user_events "+
 				"where activityTimestamp < current_time() and activityTimestamp >" + "'"+dateToCompute+"'"+") as t;";

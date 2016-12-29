@@ -14,11 +14,9 @@ public class ScheduledTask extends TimerTask
 	public void run() 
 	{
 		now = new Date();
-		Date timeToSend = new Date(System.currentTimeMillis()-(7*60*1000));
+		Date timeToSend = new Date(System.currentTimeMillis()-(7*60*1000));  //compute current time - 7 minutes
 		try
 		{
-		/*	ScheduledJob.printLast20Activities(timeToSend);
-			ScheduledJob.printTop10UserActivitiesByTop10Users(timeToSend);*/
 			ScheduledJob.printAllAnswers(timeToSend);
 			
 		}
