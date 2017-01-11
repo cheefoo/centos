@@ -233,7 +233,10 @@ Start the Archiving Consumer from the **~/centos** directory
   cd ..  
 
   ```
-5. Start the producer  
+5. SSH into the KPL Instance and edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data. Modify ~/centos/kpl_config.properties appropriately.
+
+Start the producer  
+```mvn compile```
   ```
   nohup bash -c \  
   "(mvn exec:java -Dexec.mainClass=com.tayo.centos.ProducerOne > ~/centos/logs/producer.log) \  
@@ -241,7 +244,8 @@ Start the Archiving Consumer from the **~/centos** directory
 
   ```
   
-6. Start the Job Scheduler  
+6. From the KCL instance, Start the Job Scheduler 
+
   ```
   nohup bash -c \  
   "(mvn exec:java -Dexec.mainClass=ccom.tayo.centos.scheduler.DashboardMonitor  > ~/centos/logs/scheduler.log) \  
@@ -249,7 +253,7 @@ Start the Archiving Consumer from the **~/centos** directory
 
   ```
   
-7. Start the NodeJS Server  from the webapps directory
+7. From the KCL instance,  Start the NodeJS Server  from the webapps directory
   ```
  node server.js
 
