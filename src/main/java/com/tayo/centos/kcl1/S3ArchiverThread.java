@@ -123,11 +123,11 @@ public class S3ArchiverThread implements Runnable
         }
         catch(AmazonServiceException ase)
         {
-            log.error("Failed uploading file to S3 : " + path);
-        }
-        catch(IOException ase)
-        {
             log.error("Failed uploading file to S3 : " + ase.toString());
+        }
+        catch(IOException ioe)
+        {
+            log.error("Failed uploading file to S3 : " + ioe.toString());
         }
     }
 
