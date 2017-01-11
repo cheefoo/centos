@@ -147,7 +147,7 @@ The application consists of 5 components:
   EOF  
 
   ```
-6. Take note of the returned "InstanceId" after launching each instance in order to create tags
+6. Please note that image-id is specific to us-east-1, if you are launching in a different region please look up the image-id in that region. Take note of the returned "InstanceId" after launching each instance in order to create tags
   ``` 
   aws ec2 run-instances \  
   --image-id ami-9be6f38c \  
