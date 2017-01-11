@@ -35,7 +35,7 @@ The application consists of 5 components:
   ```
   aws kinesis create-stream --stream-name 12616-Stream --shard-count 2  
   ```
-2. Create the Kinesis IAM roles required for EC2 Instances  
+2. Create the Kinesis IAM roles required for EC2 Instances  (Please replace the account ids with your own account id)
   ```
   aws iam create-role \  
   --role-name 12616-KPLRole \  
