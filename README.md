@@ -86,7 +86,14 @@ The application consists of 5 components:
           "Effect": "Allow",  
           "Action": ["kinesis:PutRecord","kinesis:PutRecords","kinesis:DescribeStream"],  
           "Resource": ["arn:aws:kinesis:us-east-1:111122223333:stream/12616-Stream"]  
-      }]  
+      },
+      {  
+          "Sid": "Stmt1482832527000",  
+          "Effect": "Allow",  
+          "Action": ["cloudwatch:PutMetricData"],  
+          "Resource": ["*"]  
+      }
+      ]  
   }'  
 
   aws iam create-policy \  
@@ -98,7 +105,15 @@ The application consists of 5 components:
           "Effect": "Allow",  
           "Action": ["kinesis:Get*"],  
           "Resource": ["arn:aws:kinesis:us-east-1:111122223333:stream/12616-Stream"]  
-      }, {  
+      }, 
+      {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": "arn:aws:s3:::bucket/12616S3Bucket-"
+        },
+      {  
           "Effect": "Allow",  
           "Action": ["kinesis:DescribeStream"],  
           "Resource": ["arn:aws:kinesis:us-east-1:111122223333:stream/12616-Stream"]  
