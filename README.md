@@ -197,8 +197,10 @@ The application consists of 5 components:
 | indexfile     | /home/ec2-user/centos/webapp/public/index.html | Dashboard index page                                                            |
 | filelocation  | /home/ec2-user/centos/scripts/generatedData    | Input file location (json formatted)                                            |
 | streamname    | None                                           | Name of the AWS Kinesis Stream                                                  |
-| region        | us-east-1                                      | AWS Region of the Kinesis Stream                                                |
+| region        | us-west-2                                     | AWS Region of the Kinesis Stream                                                |
 | s3bucket      | None                                           | S3 Bucket Name for archived data                                                |
+| kcl_archiver_name      | CentosArchiver                        | KCL App name for the S3 Archiver consumer                                                |
+| kcl_dashboard_name      | CentosDashboard                      | KCL App name for the dashboard consumer                                                 |
 
 ###Running the Example:
 1. SSH into the KCL Instance and edit the **~/centos/src/main/resources/db.properties** file according to the resources created. 
