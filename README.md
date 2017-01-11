@@ -111,7 +111,7 @@ The application consists of 5 components:
             "Action": [
                 "s3:*"
             ],
-            "Resource": "arn:aws:s3:::bucket/12616S3Bucket-"
+            "Resource": ["arn:aws:s3:::12616S3Bucket-","arn:aws:s3:::12616S3Bucket-/*"]
         },
       {  
           "Effect": "Allow",  
