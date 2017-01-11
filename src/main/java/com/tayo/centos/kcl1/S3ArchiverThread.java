@@ -115,7 +115,7 @@ public class S3ArchiverThread implements Runnable
         try
         {
         	String bucketName = CentosUtils.getProperties().getProperty("s3bucket");
-            System.out.println("Uploading a new object to S3 from a file\n");
+            log.info("Uploading a new object to S3 bucket " + bucketName);
             File file = new File(path.toString());
             log.info("Filename is " + path.toString());
             s3Client.putObject(new PutObjectRequest(bucketName, file.getName(), file));

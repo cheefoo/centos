@@ -1,5 +1,6 @@
 package com.tayo.centos.kcl2;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.tayo.centos.util.CentosUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,7 +92,7 @@ public class DBLoaderThread implements Runnable
 
     }
 
-    private static void persistRecords(Connection conn, List<Record> recordsList) throws SQLException
+    private static void persistRecords(Connection conn, List<Record> recordsList) throws SQLException, IOException
     {
 
         PreparedStatement stmt = null;
@@ -102,12 +104,12 @@ public class DBLoaderThread implements Runnable
         String activityTimestamp = null;
         String activityType = null;
         String activityMetadata = null;
-
+        String dbname = CentosUtils.getProperties().getProperty("dbname");
         log.info("In persistRecords");
 
-       
+
             int k = 1;  // keep track of items added to batch
-            String sql = "insert into event.user_events (id, userid ,fullName, gender,relationshipStatus,  activityTimestamp, activityType , activityMetadata) "
+            String sql = "insert into " + " " + dbname+".user_events (id, userid ,fullName, gender,relationshipStatus,  activityTimestamp, activityType , activityMetadata) "
             		+ "       values (?, ?, ?, ?, ?, ?, ?, ?)ON DUPLICATE KEY UPDATE "
             		+ "userid=?,fullname=?,gender=?,relationshipstatus=?,"
             		+ "activitytimestamp=?,activitytype=?,activitymetadata=? ;";
