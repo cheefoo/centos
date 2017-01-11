@@ -84,9 +84,16 @@ The application consists of 5 components:
       "Version": "2012-10-17",  
       "Statement": [{  
           "Effect": "Allow",  
-          "Action": ["kinesis:PutRecord"],  
+          "Action": ["kinesis:PutRecord","kinesis:PutRecords","kinesis:DescribeStream"],  
           "Resource": ["arn:aws:kinesis:us-east-1:111122223333:stream/12616-Stream"]  
-      }]  
+      },
+      {  
+          "Sid": "Stmt1482832527000",  
+          "Effect": "Allow",  
+          "Action": ["cloudwatch:PutMetricData"],  
+          "Resource": ["*"]  
+      }
+      ]  
   }'  
 
   aws iam create-policy \  
@@ -98,7 +105,15 @@ The application consists of 5 components:
           "Effect": "Allow",  
           "Action": ["kinesis:Get*"],  
           "Resource": ["arn:aws:kinesis:us-east-1:111122223333:stream/12616-Stream"]  
-      }, {  
+      }, 
+      {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": "arn:aws:s3:::bucket/12616S3Bucket-"
+        },
+      {  
           "Effect": "Allow",  
           "Action": ["kinesis:DescribeStream"],  
           "Resource": ["arn:aws:kinesis:us-east-1:111122223333:stream/12616-Stream"]  
@@ -197,8 +212,10 @@ The application consists of 5 components:
 | indexfile     | /home/ec2-user/centos/webapp/public/index.html | Dashboard index page                                                            |
 | filelocation  | /home/ec2-user/centos/scripts/generatedData    | Input file location (json formatted)                                            |
 | streamname    | None                                           | Name of the AWS Kinesis Stream                                                  |
-| region        | us-east-1                                      | AWS Region of the Kinesis Stream                                                |
+| region        | us-west-2                                     | AWS Region of the Kinesis Stream                                                |
 | s3bucket      | None                                           | S3 Bucket Name for archived data                                                |
+| kcl_archiver_name      | CentosArchiver                        | KCL App name for the S3 Archiver consumer                                                |
+| kcl_dashboard_name      | CentosDashboard                      | KCL App name for the dashboard consumer                                                 |
 
 ###Running the Example:
 1. SSH into the KCL Instance and edit the **~/centos/src/main/resources/db.properties** file according to the resources created. 
@@ -233,7 +250,10 @@ Start the Archiving Consumer from the **~/centos** directory
   cd ..  
 
   ```
-5. Start the producer  
+5. SSH into the KPL Instance and edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data. Modify ~/centos/kpl_config.properties appropriately.
+
+Start the producer  
+```mvn compile```
   ```
   nohup bash -c \  
   "(mvn exec:java -Dexec.mainClass=com.tayo.centos.ProducerOne > ~/centos/logs/producer.log) \  
@@ -241,7 +261,8 @@ Start the Archiving Consumer from the **~/centos** directory
 
   ```
   
-6. Start the Job Scheduler  
+6. From the KCL instance, Start the Job Scheduler 
+
   ```
   nohup bash -c \  
   "(mvn exec:java -Dexec.mainClass=ccom.tayo.centos.scheduler.DashboardMonitor  > ~/centos/logs/scheduler.log) \  
@@ -249,7 +270,7 @@ Start the Archiving Consumer from the **~/centos** directory
 
   ```
   
-7. Start the NodeJS Server  from the webapps directory
+7. From the KCL instance,  Start the NodeJS Server  from the webapps directory
   ```
  node server.js
 
