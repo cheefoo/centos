@@ -221,16 +221,19 @@ The application consists of 5 components:
 ###Running the Example:
 1. SSH into the KCL Instance and edit the **~/centos/src/main/resources/db.properties** file according to the resources created. 
 
-```
-1a. Login to the mysql db instance and create the user_events table by using the ddl user_events.sql located in ~/centos/scripts/user_events.sql
 
+    1a. Login to the mysql db instance and create the user_events table by using the ddl user_events.sql located in ~/centos/scripts/user_events.sql
+    
+```
 mysql --host=rdsinstance12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=groot --password=####### DB12616
 
-1b. execute the ddl script
-
 ```
-mvn compile 
-Start the Archiving Consumer from the **~/centos** directory  
+    1b. execute the ddl script
+
+    ```
+    mvn compile 
+    ```
+    1c. Start the Archiving Consumer from the **~/centos** directory  
   ```
   nohup bash -c \  
   "(mvn exec:java -Dexec.mainClass=com.tayo.centos.kcl1.ConsumerApp > ~/centos/logs/archiving_consumer.log) \  
@@ -254,10 +257,15 @@ Start the Archiving Consumer from the **~/centos** directory
 
   ```
 5. SSH into the KPL Instance and edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data. Modify ~/centos/kpl_config.properties appropriately.
+ 
+    ```
+    mvn compile
+    
+    ```
+``
+    5a. Start the producer 
 
-Start the producer  
-```mvn compile```
-  ```
+ ```
   nohup bash -c \  
   "(mvn exec:java -Dexec.mainClass=com.tayo.centos.ProducerOne > ~/centos/logs/producer.log) \  
    &> ~/centos/logs/producer.log" &  
