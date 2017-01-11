@@ -186,7 +186,7 @@ The application consists of 5 components:
   aws s3 mb s3://12616S3Bucket  
 
   ```
-9. SSH into the KCL Instance and edit the **~/centos/target/classes/db.properties** file according to the resources created
+9. Dont forget to modify the default security group to allow ssh access. SSH into the KCL Instance and edit the **~/home/ec2-user/centos/src/main/resources** file according to the resources created
 
 | Key           | Default                                        | Description                                                                     |
 | :------------ | :--------------------------------------------- | :------------------------------------------------------------------------------ |
