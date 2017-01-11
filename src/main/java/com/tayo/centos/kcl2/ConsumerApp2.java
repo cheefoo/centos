@@ -24,7 +24,6 @@ import java.util.UUID;
  */
 public class ConsumerApp2
 {
-    private static final String KCL_APP_NAME = "CentosDashboardConsumer";
     private static final InitialPositionInStream INITIAL_POSITION_IN_STREAM = InitialPositionInStream.LATEST;
     private static AWSCredentialsProvider credentialsProvider;
     private static final Logger log = LoggerFactory.getLogger(ConsumerApp2.class);
@@ -51,9 +50,10 @@ public class ConsumerApp2
 
         String workerId = InetAddress.getLocalHost().getCanonicalHostName() + ":" + UUID.randomUUID();
         String streamName = CentosUtils.getProperties().getProperty("streamname");
+        String appName = CentosUtils.getProperties().getProperty("kcl_dashboard_name");
         String region = CentosUtils.getProperties().getProperty("region");
         KinesisClientLibConfiguration kinesisClientLibConfiguration =
-                new KinesisClientLibConfiguration(KCL_APP_NAME,
+                new KinesisClientLibConfiguration(appName,
                         streamName,
                         credentialsProvider,
                         workerId);
