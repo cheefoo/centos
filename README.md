@@ -141,7 +141,7 @@ The application consists of 5 components:
   wget http://mirrors.whoishostingthis.com/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip  
   unzip apache-maven-3.3.9-bin.zip  
   echo "export PATH=\$PATH:/home/ec2-user/apache-maven-3.3.9/bin" >> .bashrc  
-  git clone https://github.com/leclue/centos.git  
+  git clone https://github.com/cheefoo/centos.git  
   mkdir ./centos/logs  
   chown -R ec2-user ./centos  
   EOF  
