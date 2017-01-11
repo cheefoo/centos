@@ -84,7 +84,7 @@ The application consists of 5 components:
       "Version": "2012-10-17",  
       "Statement": [{  
           "Effect": "Allow",  
-          "Action": ["kinesis:PutRecord","kinesis:PutRecords"],  
+          "Action": ["kinesis:PutRecord","kinesis:PutRecords","kinesis:DescribeStream"],  
           "Resource": ["arn:aws:kinesis:us-east-1:111122223333:stream/12616-Stream"]  
       }]  
   }'  
