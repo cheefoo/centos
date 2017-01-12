@@ -224,7 +224,7 @@ The application consists of 5 components:
 2.Login to the mysql db instance from the ec2 instance and create the user_events table by using the ddl user_events.sql located in ~/centos/src/main/resources/scripts/user_events.sql
     
 ```
-mysql --host=rdsinstance12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=groot --password=####### DB12616
+mysql --host=rdsinstance12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=groot --password=groot1234# DB12616 < ~/centos/src/main/resources/user_events.sql
 
 execute the ddl script
 
@@ -262,7 +262,11 @@ execute the ddl script
   cd ..  
 
   ```
-7. Edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data. Modify ~/centos/kpl_config.properties appropriately.
+7. Edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data as well as the stream name. Modify ~/centos/kpl_config.properties appropriately.
+| Key           | Default                                        | Description                                                                     |
+| :------------ | :--------------------------------------------- | :------------------------------------------------------------------------------ |
+| tempDirectory    | /home/ec2-user/centos                                           | temp directory where the amazon KPL libraries are extracted to   |
+| region    | us-west-2                                        | region in which you have the kinesis stream    |
 
 8.Compile the application
  
@@ -300,7 +304,7 @@ execute the ddl script
 ```
   
 Note:   
-* KPL reads region and stream name from "./kpl_config.properties"  
+* KPL reads region from "./kpl_config.properties" and stream name from ./db.properties 
 * KCL Apps reads region and stream name from ./db.properties
 
 
