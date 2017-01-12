@@ -252,7 +252,12 @@ execute the ddl script
   &> ~/centos/logs/dashboard_consumer.log" &  
 
   ```
-5.SSH into the KPL Instance and edit the **~/centos/kpl_config.properties** file according to the resources created.  
+5.SSH into the KPL Instance and edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data as well as the stream name. Modify ~/centos/kpl_config.properties appropriately.  
+
+| Key           | Default                                        | Description                                                                     |
+| :------------ | :--------------------------------------------- | :------------------------------------------------------------------------------ |
+| tempDirectory    | /home/ec2-user/centos                                           | temp directory where the amazon KPL libraries are extracted to   |
+| region    | us-west-2                                        | region in which you have the kinesis stream    |
 
 6.Generate some sample data  
   ```
@@ -262,14 +267,9 @@ execute the ddl script
   cd ..  
 
   ```
-7.Edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data as well as the stream name. Modify ~/centos/kpl_config.properties appropriately.
 
-| Key           | Default                                        | Description                                                                     |
-| :------------ | :--------------------------------------------- | :------------------------------------------------------------------------------ |
-| tempDirectory    | /home/ec2-user/centos                                           | temp directory where the amazon KPL libraries are extracted to   |
-| region    | us-west-2                                        | region in which you have the kinesis stream    |
 
-8.Compile the application
+7.Compile the application
  
     ```
     cd centos
@@ -277,7 +277,7 @@ execute the ddl script
     
     ```
 
-9.Start the producer 
+8.Start the producer 
 
  ```
   nohup bash -c \  
@@ -286,7 +286,7 @@ execute the ddl script
 
   ```
   
-10.Ssh back into the KCL instance and from the KCL instance, Start the Job Scheduler 
+9.Ssh back into the KCL instance and from the KCL instance, Start the Job Scheduler 
 
   ```
   nohup bash -c \  
@@ -295,12 +295,12 @@ execute the ddl script
 
   ```
   
-11.From the KCL instance,  Start the NodeJS Server  from the webapps directory
+10.From the KCL instance,  Start the NodeJS Server  from the webapps directory
   ```
  nohup node server.js >/home/ec2-user/centos/logs/server.log 2>/home/ec2-user/centos/logs/server.log &
 
   ```
-12.Open http://XX.YYY.XXX.ZZZZ:8080/ from your browser.
+11.Open http://XX.YYY.XXX.ZZZZ:8080/ from your browser.
 
 ```
   
