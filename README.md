@@ -256,7 +256,7 @@ mysql --host=rdsinstance12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=gr
   cd ..  
 
   ```
-5. SSH into the KPL Instance and edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data. Modify ~/centos/kpl_config.properties appropriately.
+5. Edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data. Modify ~/centos/kpl_config.properties appropriately.
  
     ```
     mvn compile
