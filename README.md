@@ -286,11 +286,11 @@ execute the ddl script
 
   ```
   
-10.From the KCL instance, Start the Job Scheduler 
+10.Ssh back into the KCL instance and from the KCL instance, Start the Job Scheduler 
 
   ```
   nohup bash -c \  
-  "(mvn exec:java -Dexec.mainClass=ccom.tayo.centos.scheduler.DashboardMonitor  > ~/centos/logs/scheduler.log) \  
+  "(mvn exec:java -Dexec.mainClass=com.tayo.centos.scheduler.DashboardMonitor  > ~/centos/logs/scheduler.log) \  
    &> ~/centos/logs/scheduler.log" &  
 
   ```
