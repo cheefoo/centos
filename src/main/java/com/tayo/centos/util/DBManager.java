@@ -33,8 +33,7 @@ public class DbManager
             props.setProperty("user", prop.getProperty("mysqldbuser"));
             props.setProperty("password", prop.getProperty("mysqldbpwd"));
             conn = DriverManager.getConnection(prop.getProperty("mysqldburl"), props);
-
-            log.info("Connected to DB...");
+            log.info("Connected to DB... wink wink");
         }
         catch (ClassNotFoundException e1)
         {

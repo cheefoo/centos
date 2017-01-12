@@ -1,22 +1,17 @@
 package com.tayo.centos.kcl2;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
-import com.tayo.centos.util.CentosUtils;
 import com.tayo.centos.util.DbManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

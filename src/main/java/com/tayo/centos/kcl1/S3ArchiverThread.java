@@ -93,7 +93,7 @@ public class S3ArchiverThread implements Runnable
             }
 
         AmazonS3Client s3Client = new AmazonS3Client(new DefaultAWSCredentialsProviderChain());
-        s3Client.setRegion(Region.getRegion(Regions.US_WEST_2));
+
         try
         {
             System.out.println("Uploading a new object to S3 from a file\n");
