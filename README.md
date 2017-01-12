@@ -210,7 +210,8 @@ The application consists of 5 components:
 | mysqldbuser   | None                                           | Username for the MySQL Database                                                 |
 | mysqldbpwd    | None                                           | Password for the MySQL Database                                                 |
 | indexfile     | /home/ec2-user/centos/webapp/public/index.html | Dashboard index page                                                            |
-| filelocation  | /home/ec2-user/centos/scripts/generatedData    | Input file location (json formatted)                                            |
+| filelocation  | /home/ec2-user/centos/scripts/kplWatch    | Input file location (json formatted)                                            |
+| filearchive   | /home/ec2-user/centos/scripts/archiveDir    | Archive directory where KPL moves file after processing                                            |
 | streamname    | None                                           | Name of the AWS Kinesis Stream                                                  |
 | region        | us-west-2                                     | AWS Region of the Kinesis Stream                                                |
 | s3bucket      | None                                           | S3 Bucket Name for archived data                                                |
