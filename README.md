@@ -297,7 +297,7 @@ execute the ddl script
   
 11.From the KCL instance,  Start the NodeJS Server  from the webapps directory
   ```
- node server.js
+ nohup node server.js >/home/ec2-user/centos/logs/server.log 2>/home/ec2-user/centos/logs/server.log &
 
   ```
 12.Open http://XX.YYY.XXX.ZZZZ:8080/ from your browser.
