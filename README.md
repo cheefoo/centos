@@ -263,6 +263,7 @@ execute the ddl script
 
   ```
 7. Edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data as well as the stream name. Modify ~/centos/kpl_config.properties appropriately.
+
 | Key           | Default                                        | Description                                                                     |
 | :------------ | :--------------------------------------------- | :------------------------------------------------------------------------------ |
 | tempDirectory    | /home/ec2-user/centos                                           | temp directory where the amazon KPL libraries are extracted to   |
