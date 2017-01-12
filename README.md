@@ -262,7 +262,8 @@ mysql --host=rdsexample12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=gro
   ```
   cd ~/centos/scripts/  
   rm -rf ./generatedData  
-  python generateJson.py 2 10  
+  python generateJson.py 500 50 > ~/centos/logs/generateData.log &> ~/centos/logs/generateData.log &
+
   cd ..  
 
   ```
