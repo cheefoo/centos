@@ -217,6 +217,7 @@ The application consists of 5 components:
 | s3bucket      | None                                           | S3 Bucket Name for archived data                                                |
 | kcl_archiver_name      | CentosArchiver                        | KCL App name for the S3 Archiver consumer                                                |
 | kcl_dashboard_name      | CentosDashboard                      | KCL App name for the dashboard consumer                                                 |
+| s3endpoint      | None                      | s3 endpoint where the bucket is located                                                  |
 
 
 ###Running the Example:
