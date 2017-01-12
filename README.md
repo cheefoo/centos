@@ -219,9 +219,9 @@ The application consists of 5 components:
 
 
 ###Running the Example:
-1. SSH into the KCL Instance and edit the **~/centos/src/main/resources/db.properties** file according to the resources created. 
+1.SSH into the KCL Instance and edit the **~/centos/src/main/resources/db.properties** file according to the resources created. 
 
-2. Login to the mysql db instance from the ec2 instance and create the user_events table by using the ddl user_events.sql located in ~/centos/scripts/user_events.sql
+2.Login to the mysql db instance from the ec2 instance and create the user_events table by using the ddl user_events.sql located in ~/centos/scripts/user_events.sql
     
 ```
 mysql --host=rdsinstance12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=groot --password=####### DB12616
@@ -230,28 +230,31 @@ execute the ddl script
 
 ```  
 
-3. Compile the application
+3.Compile the application
+
     ```
     cd centos
     mvn compile 
+    
     ```
-4. Start the Archiving Consumer from the **~/centos** directory  
+    
+4.Start the Archiving Consumer from the **~/centos** directory  
   ```
   nohup bash -c \  
   "(mvn exec:java -Dexec.mainClass=com.tayo.centos.kcl1.ConsumerApp > ~/centos/logs/archiving_consumer.log) \  
    &> ~/centos/logs/archiving_consumer.log" &  
 
   ```
-4. Start the dashboard consumer  
+5.Start the dashboard consumer  
   ```
   nohup bash -c \  
   "(mvn exec:java -Dexec.mainClass=com.tayo.centos.kcl2.ConsumerApp2 > ~/centos/logs/dashboard_consumer.log) \  
   &> ~/centos/logs/dashboard_consumer.log" &  
 
   ```
-5. SSH into the KPL Instance and edit the **~/centos/kpl_config.properties** file according to the resources created.  
+5.SSH into the KPL Instance and edit the **~/centos/kpl_config.properties** file according to the resources created.  
 
-6. Generate some sample data  
+6.Generate some sample data  
   ```
   cd ~/centos/scripts/  
   rm -rf ./generatedData  
@@ -261,7 +264,7 @@ execute the ddl script
   ```
 7. Edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data. Modify ~/centos/kpl_config.properties appropriately.
 
-8. Compile the application
+8.Compile the application
  
     ```
     cd centos
@@ -269,7 +272,7 @@ execute the ddl script
     
     ```
 
-9. Start the producer 
+9.Start the producer 
 
  ```
   nohup bash -c \  
@@ -278,7 +281,7 @@ execute the ddl script
 
   ```
   
-10. From the KCL instance, Start the Job Scheduler 
+10.From the KCL instance, Start the Job Scheduler 
 
   ```
   nohup bash -c \  
@@ -287,12 +290,12 @@ execute the ddl script
 
   ```
   
-11. From the KCL instance,  Start the NodeJS Server  from the webapps directory
+11.From the KCL instance,  Start the NodeJS Server  from the webapps directory
   ```
  node server.js
 
   ```
-12.  Open http://XX.YYY.XXX.ZZZZ:8080/ from your browser.
+12.Open http://XX.YYY.XXX.ZZZZ:8080/ from your browser.
 
 ```
   
