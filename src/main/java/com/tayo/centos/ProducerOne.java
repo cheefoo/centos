@@ -111,14 +111,14 @@ public class ProducerOne
                     {
                         userList = getDataObjects(file); //gets the user objects from file into a list
                         log.info("Obtained user event list : " + userList.size());
-                        log.info("About to delete completed file : " + file);
-                        if(deleteReadFile(file))
+                        log.info("About to move completed file : " + file);
+                        if(moveReadFile(file))
                         {
-                           log.info("file +  " + file + " "+ "deleted successfully");
+                           log.info("file +  " + file + " "+ "moved successfully");
                         }
                         else
                         {
-                            log.error("File delete for " + file + " " + "failed");
+                            log.error("File move for " + file + " " + "failed");
                         }
 
                     } catch (Exception e)
@@ -175,6 +175,23 @@ public class ProducerOne
         else
         {
             log.error("Unable to delete file "+ file.getName());
+
+        }
+        return false;
+    }
+
+    private static boolean moveReadFile(String  fileName) throws IOException
+    {
+        String archiveFolder = CentosUtils.getProperties().getProperty("filearchive");
+        File file = new File(fileName);
+        if(file.renameTo(new File(archiveFolder+"//"+"centosarchive"+System.currentTimeMillis())))
+        {
+            log.info(file.getName() + " has been moved to :" + archiveFolder);
+            return true;
+        }
+        else
+        {
+            log.error("Unable to move file "+ file.getName());
 
         }
         return false;
