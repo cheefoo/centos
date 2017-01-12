@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.tayo.centos.util.CentosUtils;
+import com.tayo.centos.util.DbManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +50,7 @@ public class DBLoaderThread implements Runnable
     {
     	try 
 		{
-			Connection conn = getConnection();
+			Connection conn = DbManager.getConnection();
 			log.info("Connected to DB! smiles..." + conn.toString());
 			persistRecords(conn, this.getRecordList());
 
@@ -67,7 +68,7 @@ public class DBLoaderThread implements Runnable
     {
         try
         {
-            Connection conn = getConnection();
+            Connection conn = DbManager.getConnection();
             log.info("Connected to DB! smiles..." + conn.toString());
             List<Record> recordList = new ArrayList<Record>();
 
@@ -104,12 +105,12 @@ public class DBLoaderThread implements Runnable
         String activityTimestamp = null;
         String activityType = null;
         String activityMetadata = null;
-        String dbname = CentosUtils.getProperties().getProperty("dbname");
+       // String dbname = CentosUtils.getProperties().getProperty("dbname");
         log.info("In persistRecords");
 
 
             int k = 1;  // keep track of items added to batch
-            String sql = "insert into " + " " + dbname+".user_events (id, userid ,fullName, gender,relationshipStatus,  activityTimestamp, activityType , activityMetadata) "
+            String sql = "insert into user_events (id, userid ,fullName, gender,relationshipStatus,  activityTimestamp, activityType , activityMetadata) "
             		+ "       values (?, ?, ?, ?, ?, ?, ?, ?)ON DUPLICATE KEY UPDATE "
             		+ "userid=?,fullname=?,gender=?,relationshipstatus=?,"
             		+ "activitytimestamp=?,activitytype=?,activitymetadata=? ;";
@@ -189,39 +190,5 @@ public class DBLoaderThread implements Runnable
         
     }
 
-    private static Connection getConnection() throws Exception
-    {
-        Connection conn = null;
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input = classLoader.getResourceAsStream("db.properties");
-        Properties prop = new Properties();
-        log.info("Input from classloader is :" + input.toString());
-        prop.load(input);
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            log.info("Connecting to database...");
-            Properties props = new Properties();
-            props.setProperty("user", prop.getProperty("mysqldbuser"));
-            props.setProperty("password", prop.getProperty("mysqldbpwd"));
-            conn = DriverManager.getConnection(prop.getProperty("mysqldburl"), props);
-            
-            log.info("Connected to DB...");
-        }
-        catch (ClassNotFoundException e1)
-        {
-            log.error("Encountered a ClassNotFoundException : " + e1.toString());
-            e1.printStackTrace();
-            throw new ClassNotFoundException();
-        }
-        catch (SQLException e1)
-        {
-            log.error("Encountered an SQL Exception :" + e1.toString());
-            e1.printStackTrace();
-            throw new SQLException();
-        }
-
-        return conn;
-    }
 
 }

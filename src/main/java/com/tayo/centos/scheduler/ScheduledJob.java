@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+
+import com.tayo.centos.util.DbManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,46 +45,11 @@ public class ScheduledJob
 
 
 	
-	private static Connection getConnection() throws Exception
-    {
-        Connection conn = null;
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input = classLoader.getResourceAsStream("db.properties");
-        Properties prop = new Properties();
-        log.info("Input from classloader is :" + input.toString());
-        prop.load(input);
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            log.info("Connecting to database...");
-            Properties props = new Properties();
-            props.setProperty("user", prop.getProperty("mysqldbuser"));
-            props.setProperty("password", prop.getProperty("mysqldbpwd"));
-            conn = DriverManager.getConnection(prop.getProperty("mysqldburl"), props);
-            
-            log.info("Connected to DB...");
-        }
-        catch (ClassNotFoundException e1)
-        {
-            log.error("Encountered a ClassNotFoundException : " + e1.toString());
-            e1.printStackTrace();
-            throw new ClassNotFoundException();
-        }
-        catch (SQLException e1)
-        {
-            log.error("Encountered an SQL Exception :" + e1.toString());
-            e1.printStackTrace();
-            throw new SQLException();
-        }
-
-        return conn;
-    }
-
 	static void printAllAnswers(Date timeToSend)throws Exception
 	{
 		log.info("Time to send is : " + format.format(timeToSend));
 		String dateToCompute = format.format(timeToSend);
-		Connection conn = getConnection();
+		Connection conn = DbManager.getConnection();
 		java.sql.PreparedStatement ps = null;
 		/*
 		* Query to collect last activities
