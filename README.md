@@ -225,7 +225,7 @@ The application consists of 5 components:
 2.Login to the mysql db instance from the ec2 instance and create the user_events table by using the ddl user_events.sql located in ~/centos/src/main/resources/scripts/user_events.sql
     
 ```
-mysql --host=rdsinstance12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=groot --password=groot1234# DB12616 < ~/centos/src/main/resources/user_events.sql
+mysql --host=rdsexample12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=groot --password=###### DB12616 < ~/centos/src/main/resources/user_events.sql
 
 execute the ddl script
 
