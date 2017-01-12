@@ -6,6 +6,7 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.kinesis.model.Record;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.GetBucketLocationRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.tayo.centos.util.CentosUtils;
 
@@ -27,7 +28,7 @@ import java.util.List;
  */
 public class S3ArchiverThread implements Runnable
 {
-    private static String BUCKET_NAME = "temitayo-centos";
+    private static String BUCKET_NAME = "12615eucentral";
     private static final String PREFIX = "centos";
     private static final String fileName = "centos_consumer";
     private static final Logger log = LoggerFactory.getLogger(S3ArchiverThread.class);
@@ -93,7 +94,7 @@ public class S3ArchiverThread implements Runnable
             }
 
         AmazonS3Client s3Client = new AmazonS3Client(new DefaultAWSCredentialsProviderChain());
-
+       // s3Client.setEndpoint("s3.eu-central-1.amazonaws.com");
         try
         {
             System.out.println("Uploading a new object to S3 from a file\n");
@@ -111,9 +112,10 @@ public class S3ArchiverThread implements Runnable
 
     private void uploadS3File(String path)
     {
-    	
+
         try
         {
+            s3Client.setEndpoint(CentosUtils.getProperties().getProperty("s3endpoint"));
         	String bucketName = CentosUtils.getProperties().getProperty("s3bucket");
             log.info("Uploading a new object to S3 bucket " + bucketName);
             File file = new File(path.toString());
