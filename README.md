@@ -262,7 +262,7 @@ execute the ddl script
   cd ..  
 
   ```
-7. Edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data as well as the stream name. Modify ~/centos/kpl_config.properties appropriately.
+7.Edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data as well as the stream name. Modify ~/centos/kpl_config.properties appropriately.
 
 | Key           | Default                                        | Description                                                                     |
 | :------------ | :--------------------------------------------- | :------------------------------------------------------------------------------ |
