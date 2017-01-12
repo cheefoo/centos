@@ -300,7 +300,7 @@ execute the ddl script
  nohup node server.js >/home/ec2-user/centos/logs/server.log 2>/home/ec2-user/centos/logs/server.log &
 
   ```
-11.Open http://XX.YYY.XXX.ZZZZ:8080/ from your browser.
+11.Open http://XX.YYY.XXX.ZZZZ:8080/ from your browser.  Make sure inbound port 8080 is open
 
 ```
   
