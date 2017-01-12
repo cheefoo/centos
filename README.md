@@ -202,7 +202,7 @@ The application consists of 5 components:
   aws s3 mb s3://12616S3Bucket  
 
   ```
-9. Dont forget to modify the default security group to allow ssh access. SSH into the KCL Instance and edit the **~/home/ec2-user/centos/src/main/resources** file according to the resources created
+9. Dont forget to modify the default security group to allow ssh access. 
 
 | Key           | Default                                        | Description                                                                     |
 | :------------ | :--------------------------------------------- | :------------------------------------------------------------------------------ |
@@ -216,39 +216,42 @@ The application consists of 5 components:
 | s3bucket      | None                                           | S3 Bucket Name for archived data                                                |
 | kcl_archiver_name      | CentosArchiver                        | KCL App name for the S3 Archiver consumer                                                |
 | kcl_dashboard_name      | CentosDashboard                      | KCL App name for the dashboard consumer                                                 |
-| dbname      | DB12616                      | Name of the database schema                                                  |
+
 
 ###Running the Example:
 1. SSH into the KCL Instance and edit the **~/centos/src/main/resources/db.properties** file according to the resources created. 
 
-
-    1a. Login to the mysql db instance and create the user_events table by using the ddl user_events.sql located in ~/centos/scripts/user_events.sql
+2. Login to the mysql db instance from the ec2 instance and create the user_events table by using the ddl user_events.sql located in ~/centos/scripts/user_events.sql
     
 ```
 mysql --host=rdsinstance12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=groot --password=####### DB12616
 
-```
-    1b. execute the ddl script
+execute the ddl script
 
+```  
+
+3. Compile the application
     ```
+    cd centos
     mvn compile 
     ```
-    1c. Start the Archiving Consumer from the **~/centos** directory  
+4. Start the Archiving Consumer from the **~/centos** directory  
   ```
   nohup bash -c \  
   "(mvn exec:java -Dexec.mainClass=com.tayo.centos.kcl1.ConsumerApp > ~/centos/logs/archiving_consumer.log) \  
    &> ~/centos/logs/archiving_consumer.log" &  
 
   ```
-2. Start the dashboard consumer  
+4. Start the dashboard consumer  
   ```
   nohup bash -c \  
   "(mvn exec:java -Dexec.mainClass=com.tayo.centos.kcl2.ConsumerApp2 > ~/centos/logs/dashboard_consumer.log) \  
   &> ~/centos/logs/dashboard_consumer.log" &  
 
   ```
-3. SSH into the KPL Instance and edit the **~/centos/kpl_config.properties** file according to the resources created.  
-4. Generate some sample data  
+5. SSH into the KPL Instance and edit the **~/centos/kpl_config.properties** file according to the resources created.  
+
+6. Generate some sample data  
   ```
   cd ~/centos/scripts/  
   rm -rf ./generatedData  
@@ -256,14 +259,17 @@ mysql --host=rdsinstance12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=gr
   cd ..  
 
   ```
-5. Edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data. Modify ~/centos/kpl_config.properties appropriately.
+7. Edit the **~/centos/src/main/resources/db.properties** file, add your location for the generated data. Modify ~/centos/kpl_config.properties appropriately.
+
+8. Compile the application
  
     ```
+    cd centos
     mvn compile
     
     ```
-``
-    5a. Start the producer 
+
+9. Start the producer 
 
  ```
   nohup bash -c \  
@@ -272,7 +278,7 @@ mysql --host=rdsinstance12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=gr
 
   ```
   
-6. From the KCL instance, Start the Job Scheduler 
+10. From the KCL instance, Start the Job Scheduler 
 
   ```
   nohup bash -c \  
@@ -281,12 +287,12 @@ mysql --host=rdsinstance12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=gr
 
   ```
   
-7. From the KCL instance,  Start the NodeJS Server  from the webapps directory
+11. From the KCL instance,  Start the NodeJS Server  from the webapps directory
   ```
  node server.js
 
   ```
-8.  Open http://XX.YYY.XXX.ZZZZ:8080/ from your browser.
+12.  Open http://XX.YYY.XXX.ZZZZ:8080/ from your browser.
 
 ```
   
