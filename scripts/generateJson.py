@@ -34,15 +34,26 @@ numberRows = int(sys.argv[2])
 relationshipStatus = ["single", "in a relationship", "married", "engaged", "divorced", "have cats"]
 activityType = ["CommentAdded", "CommentRemoved", "TopicViewed", "ProfileUpdated", "CommentLiked", "CommentDisliked", "ProfileCreated"]
 sex = ["M", "F", "O"]
+targetDir = './generatedData'
+kplDir = './kplWatch'
+archiveDir = './archiveDir'
+
+#Directory which the KPL watches
+if not os.path.exists(kplDir):
+      os.mkdir(kplDir)
+
+#Directory which the KPL archives read file
+if not os.path.exists(archiveDir):
+       os.mkdir(archiveDir)
 
 if __name__ == "__main__":
     # Generate data into multiple files into a sub directory called "generatedData"
-    os.mkdir('./generatedData')
+    if not os.path.exists(targetDir):
+      os.mkdir(targetDir)
     for y in xrange(numberRuns):
         timestart = time.strftime("%Y%m%d%H%M%S")
         destFile = str(uuid.uuid4()) + ".json"
-        print "Creating File: ./generatedData/" + destFile
-        file_object = open("./generatedData/" + destFile,"a")
+        file_object = open(targetDir + "/" + destFile,"a")
 
         def create_names(fake):
             for x in range(numberRows):
@@ -68,5 +79,10 @@ if __name__ == "__main__":
             fake = Factory.create()
             create_names(fake)
             file_object.close()
+            naptime=random.randint(3,40)
+            print "generated " + str(numberRows) + " records into " + targetDir + "/" + destFile
+            print "sleeping for " + str(naptime) + " seconds"
+            os.rename(targetDir+"/"+destFile, kplDir+"/"+destFile);
+            time.sleep(naptime)
 
     print("\ngenerated: " + str(numberRuns) + " files, " + "with " + str(numberRows) + " records each\n" )
