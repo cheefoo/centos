@@ -227,8 +227,6 @@ The application consists of 5 components:
 ```
 mysql --host=rdsexample12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=groot --password=###### DB12616 < ~/centos/src/main/resources/user_events.sql
 
-execute the ddl script
-
 ```  
 
 3.Compile the application
