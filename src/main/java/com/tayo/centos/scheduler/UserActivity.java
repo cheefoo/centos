@@ -4,6 +4,7 @@ public class UserActivity
 {
 	private String userId;
 	private String activityType;
+	private String activityCount;
 	
 	
 	public UserActivity(String userId, String activityType) 	
@@ -12,25 +13,21 @@ public class UserActivity
 		this.userId = userId;
 		this.activityType = activityType;
 	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) 
+
+	public UserActivity(String userId, String activityType, String activityCount)
 	{
+		super();
 		this.userId = userId;
-	}
-	public String getActivityType() 
-	{
-		return activityType;
-	}
-	public void setActivityType(String activityType) 
-	{
 		this.activityType = activityType;
+		this.activityCount = activityCount;
 	}
+
+
+
 	@Override
 	public String toString() 
 	{
-		return "userId:" + userId + ", activityType:" + activityType;
+		return "userId:" + userId + ", activityType:" + activityType + ", activityCount:" + activityCount ;
 	}
 	
 	

@@ -49,8 +49,8 @@ public class ScheduledJob
 		* Query to collect last activities
 		 */
 		String sql = "select activityType, activityTimestamp "+ 
-				" from user_events e1 where activityTimestamp = (select max(activityTimestamp)"+ 
-				" from user_events e2 where e1.id = e2.id) group by activityType;";
+				" from user_events where activityTimestamp < current_time() and activityTimestamp >" + "'"+dateToCompute+"'";
+
 		
 		log.info("SQL is " + sql);
 		ps = conn.prepareStatement(sql);
@@ -69,9 +69,8 @@ public class ScheduledJob
 		*  Query to collect top 10 activities by top users in the last 7 minutes
 		 */
 
-		String sql2 = "select activityType, userid from ("+
-				"select userid, count(userid), activityType from user_events "+
-				"where activityTimestamp < current_time() and activityTimestamp >" + "'"+dateToCompute+"'"+") as t;";
+		String sql2 = "select userid, activityType, count(activityType) as activityCount  from from user_events "+
+				"where activityTimestamp < current_time() and activityTimestamp >" + "'"+dateToCompute+"'" + " group by 2 order by 3;";
 		
 		log.info("SQL is " + sql2);
 		ps2 = conn.prepareStatement(sql2);
@@ -82,7 +81,8 @@ public class ScheduledJob
 			String activityType = rs2.getString("activityType");
 			log.info("activityType is " + activityType);
 			String userId = rs2.getString("userid");
-			UserActivity ua = new UserActivity(activityType, userId);
+			String activityCount = rs2.getString("activityCount");
+			UserActivity ua = new UserActivity(userId, activityType, activityCount);
 			log.info("userId is " + userId);
 			activities.add(ua);
 		}
