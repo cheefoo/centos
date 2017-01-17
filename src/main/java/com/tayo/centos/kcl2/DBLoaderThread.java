@@ -176,11 +176,13 @@ public class DBLoaderThread implements Runnable
                 {
                     if (stmt != null)
                         stmt.close();
+                    conn.close();
                 }
                 catch (Exception ex)
                 {
                     log.error("Exception thrown in finally when closing connection " + ex.toString());
                 }
+
             }  
         
     }
