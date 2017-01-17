@@ -204,6 +204,10 @@ The application consists of 5 components:
   ```
 9. Dont forget to modify the default security group to allow ssh access. 
 
+
+###Running the Example:
+1.SSH into the KCL Instance and edit the **~/centos/src/main/resources/db.properties** file according to the resources created. 
+
 | Key           | Default                                        | Description                                                                     |
 | :------------ | :--------------------------------------------- | :------------------------------------------------------------------------------ |
 | mysqldburl    | None                                           | The JDBC URL for the MySQL RDS Instance, e.g. jdbc:mysql://instance:3306/mydb   |
@@ -220,8 +224,7 @@ The application consists of 5 components:
 | s3endpoint      | None                      | s3 endpoint where the bucket is located                                                  |
 
 
-###Running the Example:
-1.SSH into the KCL Instance and edit the **~/centos/src/main/resources/db.properties** file according to the resources created. 
+
 
 2.Login to the mysql db instance from the ec2 instance and create the user_events table by using the ddl user_events.sql located in ~/centos/src/main/resources/scripts/user_events.sql
     
