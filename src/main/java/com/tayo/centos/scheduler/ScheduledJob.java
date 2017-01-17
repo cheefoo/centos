@@ -69,7 +69,7 @@ public class ScheduledJob
 		*  Query to collect top 10 activities by top users in the last 7 minutes
 		 */
 
-		String sql2 = "select userid, activityType, count(activityType) as activityCount  from from user_events "+
+		String sql2 = "select userid, activityType, count(activityType) as activityCount  from user_events "+
 				"where activityTimestamp < current_time() and activityTimestamp >" + "'"+dateToCompute+"'" + " group by 2 order by 3;";
 		
 		log.info("SQL is " + sql2);
