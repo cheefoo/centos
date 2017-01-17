@@ -111,7 +111,7 @@ The application consists of 5 components:
             "Action": [
                 "s3:*"
             ],
-            "Resource": ["arn:aws:s3:::12616S3Bucket-","arn:aws:s3:::12616S3Bucket-/*"]
+            "Resource": ["arn:aws:s3:::12616S3Bucket-","arn:aws:s3:::<BUCKET_NAME>/*"]
         },
       {  
           "Effect": "Allow",  
@@ -163,7 +163,7 @@ The application consists of 5 components:
   EOF  
 
   ```
-6. Please note that image-id given in below command belongs to us-east-1, if you are launching in a different region please look up the image-id for that region. Take note of the returned "InstanceId" after launching each instance in order to create tags
+6. Please note that image-id given in below command belongs to us-east-1, if you are launching in a different region please look up the image-id for that region [AWS Linux AMI IDs](https://aws.amazon.com/amazon-linux-ami/). Take note of the returned "InstanceId" after launching each instance in order to create tags
   ``` 
   aws ec2 run-instances \  
   --image-id ami-9be6f38c \  
