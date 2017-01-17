@@ -276,7 +276,6 @@ mysql --host=rdsexample12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=gro
 7.Compile the application
  
     ```
-    cd centos
     mvn compile
     
     ```
@@ -304,7 +303,7 @@ mysql --host=rdsexample12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=gro
  nohup node server.js >/home/ec2-user/centos/logs/server.log 2>/home/ec2-user/centos/logs/server.log &
 
   ```
-11.Open http://XX.YYY.XXX.ZZZZ:8080/ from your browser.  Make sure inbound port 8080 is open
+11. Open http://XX.YYY.XXX.ZZZZ:8080/ from your browser. This is the IP XX.YYY.XXX.ZZZZ is the ip address of the KCL instance.  Make sure inbound port 8080 is open
 
 ```
   
