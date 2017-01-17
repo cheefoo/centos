@@ -121,6 +121,17 @@ public class S3ArchiverThread implements Runnable
             File file = new File(path.toString());
             log.info("Filename is " + path.toString());
             s3Client.putObject(new PutObjectRequest(bucketName, file.getName(), file));
+            log.info("File : " + file +  " uploaded successfully");
+            log.info("Now removing the file .... file  : " + file);
+            //removing objects that are already uploaded
+            if(file.delete())
+            {
+                log.info("File : " + file +  " deleted successfully");
+            }
+            else
+            {
+                log.error("Unable to delete file " + file);
+            }
 
         }
         catch(AmazonServiceException ase)
