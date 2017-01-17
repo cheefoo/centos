@@ -109,11 +109,16 @@ public class ScheduledJob
         {
             try
             {
-                rs.close();
-                ps.close();
-                rs2.close();
-                ps2.close();
-                conn.close();
+                if(rs !=null)
+                    rs.close();
+                if(ps !=null)
+                    ps.close();
+                if(rs2 !=null)
+                    rs2.close();
+                if(ps2 !=null)
+                    ps2.close();
+                if(conn !=null)
+                    conn.close();
             }
             catch(Exception e)
             {

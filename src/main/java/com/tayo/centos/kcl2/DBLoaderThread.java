@@ -176,7 +176,8 @@ public class DBLoaderThread implements Runnable
                 {
                     if (stmt != null)
                         stmt.close();
-                    conn.close();
+                    if( conn != null)
+                        conn.close();
                 }
                 catch (Exception ex)
                 {
