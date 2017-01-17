@@ -27,7 +27,8 @@ public class UserActivity
 	@Override
 	public String toString() 
 	{
-		return "userId:" + userId + ", activityType:" + activityType + ", activityCount:" + activityCount ;
+
+		return "userId:" + userId + ", activityType:" + activityType;
 	}
 	
 	

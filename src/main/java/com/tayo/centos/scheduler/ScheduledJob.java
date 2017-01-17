@@ -49,7 +49,7 @@ public class ScheduledJob
 		* Query to collect last activities
 		 */
 		String sql = "select activityType, activityTimestamp "+ 
-				" from user_events where activityTimestamp < current_time() and activityTimestamp >" + "'"+dateToCompute+"'";
+				" from user_events where activityTimestamp < current_time() and activityTimestamp >" + "'"+dateToCompute+"'" + " " + " limit 20";
 
 		
 		log.info("SQL is " + sql);
@@ -70,7 +70,7 @@ public class ScheduledJob
 		 */
 
 		String sql2 = "select userid, activityType, count(activityType) as activityCount  from user_events "+
-				"where activityTimestamp < current_time() and activityTimestamp >" + "'"+dateToCompute+"'" + " group by 2 order by 3;";
+				"where activityTimestamp < current_time() and activityTimestamp >" + "'"+dateToCompute+"'" + " group by 2 order by 3 desc;";
 		
 		log.info("SQL is " + sql2);
 		ps2 = conn.prepareStatement(sql2);
