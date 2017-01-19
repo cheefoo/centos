@@ -58,7 +58,7 @@ public class S3ArchiverThread implements Runnable
 
             for(Record record: recordList)
             {
-                writer.write(DECODER.decode(record.getData()).toString());  //decodes and writes lines to file
+                writer.write(DECODER.decode(record.getData()).toString()+"\n");  //decodes and writes lines to file
             }
 
         }
