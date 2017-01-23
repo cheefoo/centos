@@ -273,11 +273,8 @@ mysql --host=rdsexample12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=gro
 
 7.Compile the application
  
-    ```
     mvn compile
     
-    ```
-
 8.Start the producer 
 
  ```
