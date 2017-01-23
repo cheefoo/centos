@@ -235,11 +235,9 @@ mysql --host=rdsexample12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=gro
 
 3.Compile the application
 
-    ```
     cd centos
     mvn compile 
     
-    ```
     
 4.Start the Archiving Consumer from the **~/centos** directory  
   ```
@@ -275,11 +273,8 @@ mysql --host=rdsexample12616.cu74pzqocy8l.us-west-2.rds.amazonaws.com --user=gro
 
 7.Compile the application
  
-    ```
     mvn compile
     
-    ```
-
 8.Start the producer 
 
  ```
