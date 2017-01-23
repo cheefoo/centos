@@ -22,5 +22,13 @@ public class CentosUtils
 
     }
 
+    public static String removeUnwantedToken(String record) throws Exception
+    {
+        if(record.length() == 0 || record == null)
+            throw new Exception("record is null or has zero length");
+
+        return record.substring(record.indexOf(",")+1, record.length());
+    }
+
 
 }
