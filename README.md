@@ -1,4 +1,4 @@
-**incomplete WIP**
+
 
 
 ##De-duplication and strict ordering Kinesis KCL example
