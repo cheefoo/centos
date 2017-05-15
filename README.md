@@ -1,7 +1,7 @@
 
 
 
-##De-duplication and strict ordering Kinesis KCL example
+## De-duplication and strict ordering Kinesis KCL example
 
 This is an end-to-end [AWS Kinesis Streams](https://aws.amazon.com/kinesis/streams/) processing example using the [AWS Kinesis Producer Library (KPL)](http://docs.aws.amazon.com/streams/latest/dev/developing-producers-with-kpl.html) to send records to a kinesis stream, consume from the stream using the [AWS Kinesis Client Library (KCL)](http://docs.aws.amazon.com/streams/latest/dev/developing-consumers-with-kcl.html) and archive data to an [Amazon S3](http://docs.aws.amazon.com/AmazonS3/latest/dev/Welcome.html) bucket. Additionally, a second KCL consumer de-duplicates the consumed records and provides realtime data updates to a web front-end. 
 
@@ -13,13 +13,13 @@ The application consists of 5 components:
 4. An S3 Archiving KCL application 
 5. A Dashboard Job Scheduler 
 
-##Architecture Diagrams:
+## Architecture Diagrams:
 ![alt tag](https://github.com/cheefoo/centos/blob/master/Archie1.png)
 
-###Architecture Diagram II:
+### Architecture Diagram II:
 ![alt tag](https://github.com/cheefoo/centos/blob/master/Archie2.png)
 
-###Requirements:
+### Requirements:
 1. An Amazon Web Services [Account](https://aws.amazon.com/free/?sc_channel=PS&sc_campaign=acquisition_ZA&sc_publisher=google&sc_medium=cloud_computing_b&sc_content=aws_account_e&sc_detail=aws%20account&sc_category=cloud_computing&sc_segment=77706639422&sc_matchtype=e&sc_country=ZA&s_kwcid=AL!4422!3!77706639422!e!!g!!aws%20account&ef_id=V9u@TgAABMH86aOm:20161227051709:s)
 2. AWS CLI Installed and configured
 3. After following the steps in the **Getting Started** section, you will have set up the following resources:  
@@ -30,7 +30,7 @@ The application consists of 5 components:
   3.4. An Amazon S3 bucket  
 4. When the KCL is initiated, two DynamoDB tables are created  
 
-###Setting up the environment:
+### Setting up the environment:
 1. Create a Kinesis Stream  
   ```
   aws kinesis create-stream --stream-name 12616-Stream --shard-count 2  
@@ -205,7 +205,7 @@ The application consists of 5 components:
 9. Dont forget to modify the default security group to allow ssh access. 
 
 
-###Running the Example:
+### Running the Example:
 1.SSH into the KCL Instance and edit the **~/centos/src/main/resources/db.properties** file according to the resources created. 
 
 | Key           | Default                                        | Description                                                                     |
